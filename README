@@ -2,7 +2,10 @@ Qudth randomly samples the lines within a large file and calculates statistics
 about each line. For example, in a 10-gigabyte text file, you might want to know
 how long a typical line is.
 
-::
+Line lengths
+-----------------
+It would be very convenient if line length is what you are interested in, as
+that is the only thing we implement right now. ::
 
     $ qudth qudth/cli.py -n 5 --bins 8
     
@@ -11,7 +14,10 @@ how long a typical line is.
     Lengths of 5 lines in qudth/cli.py
     (simple random sample with replacement)
 
-``wc -l`` is equivalent to qudth, but qudth's sampling makes it much faster
+Benchmarking
+---------------
+``wc -l`` is equivalent to qudth's line length estimation,
+but qudth's sampling makes it much faster
 on large files. ``big-file.csv`` is 1 gigabyte in size. ::
 
     _:~ t$ time qudth big-file.csv > /dev/null
@@ -24,3 +30,9 @@ on large files. ``big-file.csv`` is 1 gigabyte in size. ::
     real    0m2.515s
     user    0m1.475s
     sys     0m0.440s
+
+Future work
+------------
+A more standard thing would perhaps be something that emitted
+a random sample to stdout. It could support different sampling
+strategies perhaps.
