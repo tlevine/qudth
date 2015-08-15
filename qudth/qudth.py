@@ -20,7 +20,7 @@ def qudth(fp, n = None, func = aggregate.length, bins = 20):
 
 def main():
     args = argparser.parse_args()
-    stats = qudth(args.file)
+    stats = qudth(args.file, bins = args.bins)
 
     stat_keys = ['min', 'mean', 'max']
 
@@ -28,8 +28,9 @@ def main():
     formatstring = '% ' + places + 'd'
     str_stats = {k:(formatstring % (stats[k])) for k in minmax}
 
-    delimiter = len(stats['histogram']) - 3 * places
-    bottom = delimiter.join(str_stats[k] for k in stat_keys)
+    str_stats['delimiter_left'] = int((len(stats['histogram']) - 3 * places) / 2)
+    str_stats['delimiter_right'] = len(stats['histogram']) - 3 * places - delimiter_left
+    bottom = '%(delimiter_left)s%(min)s%(delimiter_right)s%(max)s' % str_stats
 
     template_args = {
         'filename': args.file.name,
@@ -40,7 +41,7 @@ def main():
 
 argparser = argparse.ArgumentParser('Estimate the length of a line in a file.')
 argparser.add_argument('file', type = argparse.FileType('rb'))
-argparser.add_argument('--bins', type = int, default = 
+argparser.add_argument('--bins', type = int, default = 20)
 
 template = '''qudth results for %(filename)s
 
