@@ -12,9 +12,8 @@ def sparkline(xs):
 def cli():
     args = argparser.parse_args()
     stats = qudth(args.file, bins = args.bins, n = args.n)
-    if stats['min'] == stats['max']
-        template = 'All %d files sampled from %s have length %d'
-        sys.stdout.write(template % args.n, args.file.name, stats['min'])
+    if stats['min'] == stats['max']:
+        sys.stdout.write(boring_template % (args.n, args.file.name, stats['min']))
         return
 
     stat_keys = ['min', 'median', 'max']
@@ -34,7 +33,7 @@ def cli():
         'histogram': sparkline(stats['histogram']),
         'bottom': bottom,
     }
-    sys.stdout.write(template % template_args)
+    sys.stdout.write(interesting_template % template_args)
 
 
 argparser = argparse.ArgumentParser('Estimate the length of a line in a file.')
@@ -42,7 +41,8 @@ argparser.add_argument('file', type = argparse.FileType('rb'))
 argparser.add_argument('--bins', type = int, default = 20)
 argparser.add_argument('--sample-size', '-n', type = int, default = 100, dest = 'n')
 
-template = '''
+boring_template = 'All %d files sampled from %s have length %d.\n'
+interesting_template = '''
 %(histogram)s
 %(bottom)s
 Lengths of %(n)d lines in %(filename)s
