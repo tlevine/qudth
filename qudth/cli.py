@@ -1,4 +1,5 @@
 import argparse, sys
+from statistics import StatisticsError
 
 from sparkprob.sparkprob import sparkprob
 
@@ -11,6 +12,10 @@ def sparkline(xs):
 def cli():
     args = argparser.parse_args()
     stats = qudth(args.file, bins = args.bins, n = args.n)
+    if stats['min'] == stats['max']
+        template = 'All %d files sampled from %s have length %d'
+        sys.stdout.write(template % args.n, args.file.name, stats['min'])
+        return
 
     stat_keys = ['min', 'median', 'max']
 

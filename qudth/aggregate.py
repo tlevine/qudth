@@ -7,10 +7,11 @@ def length(line):
 def histogram(bins, X):
     _min = min(X)
     _bucketsize = (max(X) - _min) / float(bins)
-    buckets = list(repeat(0, bins))
-    for x in X:
-        key = int((x - _min) / _bucketsize)
-        if key != _min:
-            key -= 1
-        buckets[key] += 1
-    return buckets
+    if _bucketsize > 0:
+        buckets = list(repeat(0, bins))
+        for x in X:
+            key = int((x - _min) / _bucketsize)
+            if key != _min:
+                key -= 1
+            buckets[key] += 1
+        return buckets
