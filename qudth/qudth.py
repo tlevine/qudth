@@ -1,4 +1,5 @@
 from functools import partial
+import statistics
 
 from sparkprob import sparkprob
 
@@ -13,7 +14,8 @@ def qudth(fp, n = None, func = aggregate.length, bins = 20):
     return {
         'min': min(X),
         'max': max(X),
-        'mean': aggregate.mean(X),
+        'mean': statistics.mean(X),
+        'median': statistics.median(X),
         'histogram': aggregate.histogram(bins, X),
     }
 

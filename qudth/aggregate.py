@@ -14,6 +14,3 @@ def histogram(bins, X):
             key -= 1
         buckets[key] += 1
     return buckets
-
-def mean(X):
-    return sum(X) / len(X)
