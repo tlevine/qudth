@@ -30,8 +30,12 @@ def srs(n, fp):
         line_start = fp.tell()
         line = fp.readline()
         line_end = fp.tell()
-        if line[-1] == b'\n':
+        if line == b'':
+            pass
+        elif line[-1] == 10: # newline
             lines.append((line_start, line_end))
+        else:
+            raise NotImplementedError('I can\'t handle this line:\n%s' % line)
 
     fp.seek(file_start)
     return lines
