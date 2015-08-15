@@ -24,7 +24,8 @@ def main():
 
     stat_keys = ['min', 'mean', 'max']
 
-    formatstring = '% ' + len(str(stats['max'])) + 'd'
+    places = len(str(stats['max']))
+    formatstring = '% ' + places + 'd'
     str_stats = {k:(formatstring % (stats[k])) for k in minmax}
 
     delimiter = len(stats['histogram']) - 3 * places
@@ -39,6 +40,7 @@ def main():
 
 argparser = argparse.ArgumentParser('Estimate the length of a line in a file.')
 argparser.add_argument('file', type = argparse.FileType('rb'))
+argparser.add_argument('--bins', type = int, default = 
 
 template = '''qudth results for %(filename)s
 
