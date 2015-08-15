@@ -9,7 +9,10 @@ def histogram(bins, X):
     _bucketsize = (max(X) - _min) / float(bins)
     buckets = list(repeat(0, bins))
     for x in X:
-        buckets[int((x - _min) / _bucketsize)] += 1
+        key = int((x - _min) / _bucketsize)
+        if key != _min:
+            key -= 1
+        buckets[key] += 1
     return buckets
 
 def mean(X):
