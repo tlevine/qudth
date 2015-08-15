@@ -18,4 +18,24 @@ def qudth(fp, n = None, func = aggregate.length, bins = 20):
         'histogram': aggregate.histogram(bins, X),
     }
 
-argparser = argparse.ArgumentParser('Estimate the length of a
+def main():
+    args = argparser.parse_args()
+    stats = qudth(args.file)
+    places = max(len(str(stats['min'])), len(str(stats['min'])))
+    formatstring = '% ' + str(places) + 'd'
+    for k in ['min', 'max']:
+        stats[k] = formatstring % stats[k]
+    stats 
+    template_args = {
+        'filename': fp.name,
+
+    sys.stdout.write(template % template_args)
+
+argparser = argparse.ArgumentParser('Estimate the length of a line in a file.')
+argparser.add_argument('file', type = argparse.FileType('rb'))
+
+template = '''qudth results for %(filename)s
+
+%(histogram)s
+%(min)s%(spaces)s%(mean)s%(spaces)s%(max)s
+'''

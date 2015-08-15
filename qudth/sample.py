@@ -3,7 +3,7 @@ import random
 def census(fp):
     lines = []
 
-    while line != '':
+    while line != b'':
         line_start = fp.tell()
         line = fp.readline()
         line_end = fp.tell()
@@ -29,7 +29,7 @@ def srs(n, fp):
         line_start = fp.tell()
         fp.readline()
         line_end = fp.tell()
-        if line[-1] == '\n':
+        if line[-1] == b'\n':
             lines.append((line_start, line_end))
 
     fp.seek(file_start)
