@@ -18,7 +18,6 @@ def cli():
     formatstring = '%0' + str(places) + 'd'
     str_stats = {k:(formatstring % (stats[k])) for k in stat_keys}
 
-   #n_spaces = max(2, len(stats['histogram']) - 3 * places)
     n_spaces = 2 * len(stats['histogram']) - 3 * places
     str_stats['delimiter_left'] = ' ' * int(n_spaces / 2)
     str_stats['delimiter_right'] = ' ' * (n_spaces - len(str_stats['delimiter_left']))
