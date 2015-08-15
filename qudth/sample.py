@@ -15,3 +15,4 @@ def srs(fp, n):
         fp.readline()
         line_end = fp.tell()
         lines.add((line_start, line_end))
+    return lines
