@@ -12,7 +12,7 @@ def census(fp):
     return lines
 
 
-def srs(fp, n):
+def srs(n, fp):
     '''
     with replacement
 
