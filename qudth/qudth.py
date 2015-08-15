@@ -1,3 +1,4 @@
+import argparse
 from functools import partial
 
 from sparkprob import sparkprob
@@ -11,5 +12,10 @@ def qudth(fp, n = None, func = aggregate.length, bins = 20):
         get_sample = sample.census
     X = list(map(func, get_sample(fp)))
     return {
+        'min': min(X),
+        'max': max(X),
+        'mean': aggregate.mean(X),
         'histogram': aggregate.histogram(bins, X),
     }
+
+argparser = argparse.ArgumentParser('Estimate the length of a
