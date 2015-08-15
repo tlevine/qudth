@@ -25,6 +25,7 @@ def cli():
 
     template_args = {
         'filename': args.file.name,
+        'n': args.n,
         'histogram': sparkline(stats['histogram']),
         'bottom': bottom,
     }
