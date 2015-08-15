@@ -1,17 +1,20 @@
-import random
+from itertools import count
+from random import randint
 
 def census(fp):
     lines = []
     line = None
 
-    while line != b'':
+    while True:
         line_start = fp.tell()
         line = fp.readline()
         line_end = fp.tell()
-        lines.append((line_start, line_end))
+        if line == '':
+            break
+        else:
+            lines.append((line_start, line_end))
 
     return lines
-
 
 def srs(n, fp):
     '''
@@ -24,18 +27,24 @@ def srs(n, fp):
     file_end = fp.seek(0, 2)
     lines = []
 
-    while len(lines) < n:
-        fp.seek(random.randint(file_start, file_end))
+    for i in count():
+        fp.seek(randint(file_start, file_end))
         fp.readline()
         line_start = fp.tell()
         line = fp.readline()
         line_end = fp.tell()
-        if line == b'':
+        if line == '':
             pass
-        elif line[-1] == 10: # newline
+        elif line[-1] == '\n':
             lines.append((line_start, line_end))
         else:
             raise NotImplementedError('I can\'t handle this line:\n%s' % line)
+
+        if len(lines) == n:
+            break
+
+        if len(lines) == 0 and i > 1000:
+            raise EnvironmentError('It appears that this file contains no line breaks.')
 
     fp.seek(file_start)
     return lines

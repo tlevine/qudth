@@ -37,11 +37,11 @@ def cli():
 
 
 argparser = argparse.ArgumentParser('Estimate the length of a line in a file.')
-argparser.add_argument('file', type = argparse.FileType('rb'))
+argparser.add_argument('file', type = argparse.FileType('r'))
 argparser.add_argument('--bins', type = int, default = 20)
 argparser.add_argument('--sample-size', '-n', type = int, default = 100, dest = 'n')
 
-boring_template = 'All %d files sampled from %s have length %d.\n'
+boring_template = 'All %d lines sampled from %s have length %d.\n'
 interesting_template = '''
 %(histogram)s
 %(bottom)s
