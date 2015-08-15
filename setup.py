@@ -8,7 +8,7 @@ setup(name='qudth',
       url='http://dada.pink/qudth/',
       packages=['qudth'],
       install_requires = ['sparkprob>=0.1'],
-      version='0.0.2',
+      version='0.0.3',
       license='LGPL',
       entry_points = {'console_scripts': ['qudth = qudth.cli:cli']},
 )
